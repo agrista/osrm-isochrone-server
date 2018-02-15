@@ -20,7 +20,7 @@ var url = require('url');
 var querystring = require('querystring');
 var config = require('config');
 var OSRM = require('osrm');
-var isochrone = require('osrm-isochrone');
+var isodist = require('@agrista/osrm-isodist');
 var argv = require('minimist')(process.argv.slice(2));
 var hull = require('hull.js');
 var buffer = require('turf-buffer');
@@ -42,10 +42,10 @@ var server = http.createServer(function(req, res) {
   var params = querystring.parse(url.parse(req.url).query);
   console.log(page, params);
 
-  if (page == '/0.1/isochrone') {
+  if (page == '/0.1/isodist') {
     var resolution = config.get('resolution'); // sample resolution, number of points (must be less than square root of maxMatrixSize)
-    var time = 300; // 300 second drivetime (5 minutes)
-    var location = [-77.02926635742188,38.90011780426885]; // center point
+    var time = 3600; // 300 second drivetime (5 minutes)
+    var location = [27.852,-26.212]; // center point
 
     if ('resolution' in params) {
       resolution = parseInt(params['resolution']);
@@ -75,7 +75,7 @@ var server = http.createServer(function(req, res) {
     params.unit = 'kilometers';
     params.network = osrm;
 
-    var iso = new isochrone(location, time, params, function(err, drivetime) {
+    var iso = new isodist(location, time, params, function(err, drivetime) {
       if (err) {
         res.writeHead(500, {'Content-Type': 'text/plain'});
         res.write(JSON.stringify(err));
@@ -115,7 +115,7 @@ var server = http.createServer(function(req, res) {
       };
       return result;
     };
-    iso.getIsochrone();
+    iso.getIsodist();
   } else {
     console.log(404);
     res.writeHead(404);
@@ -124,4 +124,4 @@ var server = http.createServer(function(req, res) {
 });
 
 server.listen(port);
-console.log('Listen on port ' + port);
+console.log('Listening on port ' + port);

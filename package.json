@@ -1,22 +1,26 @@
 {
-  "name": "osrm-isochrone-server",
-  "version": "5.12.1",
-  "description": "osrm-isochrone API web server",
+  "name": "osrm-isodist-server",
+  "version": "5.15.2",
+  "description": "osrm-isodist API web server",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agrista/osrm-isodist-server.git"
+  },
   "main": "server.js",
   "dependencies": {
+    "config": "^1.16.0",
+    "hull.js": "^0.2.7",
     "minimist": "^1.1.2",
     "osrm": ">=5.5",
-    "osrm-isochrone": "git+https://github.com/Mapotempo/osrm-isochrone.git",
+    "@agrista/osrm-isodist": "^1.0.0",
     "polyline": "^0.1.0",
-    "hull.js": "^0.2.7",
-    "turf-buffer": "^1.0.4",
-    "config": "^1.16.0"
+    "turf-buffer": "^1.0.4"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Frédéric Rodrigo",
+  "author": "Agrista (Pty) Ltd",
   "license": "AGPL-3.0"
 }

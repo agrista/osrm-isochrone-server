@@ -1,7 +1,7 @@
 osrm-isochrone-server
 ---
 
-Add a nodejs webserver in front of [osrm-isochrone](https://github.com/mapbox/osrm-isochrone). Expose isochrone computed by [OSRM](http://project-osrm.org/) to HTTP.
+Add a nodejs webserver in front of [osrm-isodist](https://github.com/agrista/osrm-isodist). Expose isodist computed by [OSRM](http://project-osrm.org/) to HTTP.
 
 ##Install
 ```sh
